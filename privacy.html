@@ -40,16 +40,24 @@
   <tr><th>Data</th><th>Why</th><th>How long</th></tr>
   <tr><td>The Atlassian account ID of the person who chose to watch a desk</td><td>So only that person can stop watching it, and so the app can confirm they still have access</td><td>Until the watch ends. A watch expires 30 days after the watcher last opened the board.</td></tr>
   <tr><td>Desk and project IDs you watch</td><td>To know which desks to scan</td><td>Until the watch ends</td></tr>
-  <tr><td>Scan history: each check's verdict, counts and timestamps</td><td>To learn the desk's normal rhythm and notice when it changes</td><td>Rows not seen for 14 days are deleted. Everything for a desk is deleted after its watch ends.</td></tr>
+  <tr><td>Scan history: each check's result, counts and timestamps, with the name of the thing it is about. That name is a request type name, or a short series name taken from the summary line of a recurring request (for example "nightly: backup").</td><td>To learn the desk's normal rhythm, notice when it changes, and show you which item changed</td><td>Rows not seen for 14 days are deleted. Everything for a desk is deleted after its watch ends.</td></tr>
+  <tr><td>Setup choices: which suggested items you confirmed or dismissed (stored as short codes, not names), and the names and schedules of any expected jobs you type in</td><td>So a dismissed item stays out of the health counts and alerts, and so the board can show when an expected job first appears</td><td>Until you remove them, or the watch ends</td></tr>
+  <tr><td>Scan log: one entry per scan with counts and one-way hashes, chained so tampering shows</td><td>So you can verify that scans ran and were not altered</td><td>30 days</td></tr>
   <tr><td>Records of alert issues the app opened</td><td>So the same problem does not open duplicate alerts</td><td>Up to 90 days</td></tr>
 </table>
-<p>Dead Air stores no names, email addresses, passwords or ticket text. When it opens an alert issue on your desk, that issue lives in your Jira like any other ticket and follows your site's own retention.</p>
+<p>Dead Air stores no people's names, email addresses or passwords. It does not store ticket descriptions, comments or attachments. The only ticket text it keeps is the short names described above: request type names, series names taken from the summary line of recurring requests, and job names you type in yourself. When it opens an alert issue on your desk, that issue lives in your Jira like any other ticket and follows your site's own retention.</p>
+
+<h2>App logs</h2>
+<p>Like every Forge app, Dead Air writes technical logs that Atlassian holds and the developer can read, to find and fix faults. These logs carry desk and project ID numbers, check names, counts, timings and fixed error codes. They do not carry ticket text, request type names, job names, account IDs or anything you type into the app.</p>
+
+<h2>Rovo agent and MCP tools</h2>
+<p>Dead Air includes an optional Rovo agent and an optional MCP server. Both are read only: they can list the desks Dead Air watches, show its results and explain why something was flagged, and they cannot change anything. They read only what Dead Air already stores and the same Jira data the board reads, with the permissions of the person asking. They run inside Atlassian, and nothing they read is sent anywhere else. The agent appears only on sites that have Rovo, and Atlassian bills any Rovo usage to that site's own plan. The MCP server is off until an admin of your site turns it on for the app.</p>
 
 <h2>Personal data</h2>
 <p>The only personal data Dead Air stores is the Atlassian account ID described above. Atlassian requires apps that store account IDs to report them to its personal data reporting service and to delete or update them when an account is closed or changed. Dead Air does this weekly: when Atlassian reports an account as closed, the app ends any watch held by that account and removes its account ID. You can also email the address below at any time to have a stored account ID removed.</p>
 
 <h2>Removing your data</h2>
-<p>Stopping a watch from the Dead Air board deletes that desk's watch record and schedules its scan history for deletion. Uninstalling the app removes it from your site. To ask for deletion of anything the app stored, or with any question about this policy, email <a href="mailto:7kevinmasterson@gmail.com">7kevinmasterson@gmail.com</a>.</p>
+<p>Stopping a watch from the Dead Air board deletes that desk's watch record and schedules its scan history, setup choices and expected job names for deletion. Uninstalling the app removes it from your site. To ask for deletion of anything the app stored, or with any question about this policy, email <a href="mailto:7kevinmasterson@gmail.com">7kevinmasterson@gmail.com</a>.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the updated version will be posted on this page with a new effective date.</p>
