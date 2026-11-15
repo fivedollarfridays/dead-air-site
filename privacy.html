@@ -20,7 +20,7 @@
 <body>
 <main>
 <h1>Dead Air Privacy Policy</h1>
-<p class="meta">Applies to the Dead Air and Dead Air Beta apps for Atlassian Cloud. Effective November 12, 2026.</p>
+<p class="meta">Applies to the Dead Air and Dead Air Beta apps for Atlassian Cloud. Effective November 15, 2026.</p>
 
 <p>Dead Air watches Jira Service Management desks for work that has quietly stopped, such as a request type that went silent or a recurring task that was not done. This page explains what the app stores, where it stores it, and how to have it removed.</p>
 
@@ -32,7 +32,8 @@
 <ul>
   <li>issues and service desk requests on desks you choose to watch, including their dates, request types and status;</li>
   <li>the last-edited date of Confluence pages linked from incidents, if the Confluence part is installed;</li>
-  <li>whether the person watching a desk still has access to it.</li>
+  <li>whether the person watching a desk still has access to it;</li>
+  <li>for a request that says it is a check in, whether an app or a person created it. Only that account type is read. The creator's name and account ID are not kept.</li>
 </ul>
 
 <h2>What the app stores</h2>
@@ -43,12 +44,18 @@
   <tr><td>Scan history: each check's result, counts and timestamps, with the name of the thing it is about. That name is a request type name, or a short series name taken from the summary line of a recurring request (for example "nightly: backup").</td><td>To learn the desk's normal rhythm, notice when it changes, and show you which item changed</td><td>Rows not seen for 14 days are deleted. Everything for a desk is deleted after its watch ends.</td></tr>
   <tr><td>Setup choices: which suggested items you confirmed or dismissed (stored as short codes, not names), and the names and schedules of any expected jobs you type in</td><td>So a dismissed item stays out of the health counts and alerts, and so the board can show when an expected job first appears</td><td>Until you remove them, or the watch ends</td></tr>
   <tr><td>Scan log: one entry per scan with counts and one-way hashes, chained so tampering shows</td><td>So you can verify that scans ran and were not altered</td><td>30 days</td></tr>
+  <tr><td>Check in token: a one way hash of each desk's check in token, and the time the token was created. The token itself is shown once and is never stored.</td><td>So the app can tell your jobs' check ins from anyone else calling the check in address</td><td>Until you turn check ins off or create a new token, or the watch ends</td></tr>
+  <tr><td>Check in counters: how many check ins a desk accepted this hour and this day, and a running count of refused ones</td><td>To hold the limits of 60 an hour and 500 a day for a desk, and to keep bad calls from adding up</td><td>Until the watch ends</td></tr>
   <tr><td>Records of alert issues the app opened</td><td>So the same problem does not open duplicate alerts</td><td>Up to 90 days</td></tr>
 </table>
-<p>Dead Air stores no people's names, email addresses or passwords. It does not store ticket descriptions, comments or attachments. The only ticket text it keeps is the short names described above: request type names, series names taken from the summary line of recurring requests, and job names you type in yourself. When it opens an alert issue on your desk, that issue lives in your Jira like any other ticket and follows your site's own retention.</p>
+<p>Dead Air stores no people's names, email addresses or passwords. It does not store ticket descriptions, comments or attachments. The only ticket text it keeps is the short names described above: request type names, series names taken from the summary line of recurring requests, job names you type in yourself, and job names your own jobs send in a check in. When it opens an alert issue on your desk, that issue lives in your Jira like any other ticket and follows your site's own retention.</p>
+
+<h2>Check ins from outside Jira</h2>
+<p>If you turn it on for a desk, your scripts and scheduled jobs can check in over the internet. Each install has its own check in address. That address is public, so the lock is the check in token: a call without the right token is refused and nothing is filed. Dead Air only receives these calls. It does not call out, and nothing is sent outside Atlassian.</p>
+<p>An accepted check in becomes a request in your own Jira, on the desk you chose. The job name your job sends becomes that request's title, and so it becomes a series name in scan history. The number it measured, with its unit and any short note, goes into the body of that request. Those requests live in your Jira like any other ticket and follow your site's own retention. Do not put secrets, customer names or personal details in a job name or a note.</p>
 
 <h2>App logs</h2>
-<p>Like every Forge app, Dead Air writes technical logs that Atlassian holds and the developer can read, to find and fix faults. These logs carry desk and project ID numbers, check names, counts, timings and fixed error codes. They do not carry ticket text, request type names, job names, account IDs or anything you type into the app.</p>
+<p>Like every Forge app, Dead Air writes technical logs that Atlassian holds and the developer can read, to find and fix faults. These logs carry desk and project ID numbers, check names, counts, timings and fixed error codes. They do not carry ticket text, request type names, job names, account IDs, check in tokens, the notes or units a check in sends, or anything you type into the app.</p>
 
 <h2>Rovo agent and MCP tools</h2>
 <p>Dead Air includes an optional Rovo agent and an optional MCP server. Both are read only: they can list the desks Dead Air watches, show its results and explain why something was flagged, and they cannot change anything. They read only what Dead Air already stores and the same Jira data the board reads, with the permissions of the person asking. They run inside Atlassian, and nothing they read is sent anywhere else. The agent appears only on sites that have Rovo, and Atlassian bills any Rovo usage to that site's own plan. The MCP server is off until an admin of your site turns it on for the app.</p>
@@ -57,7 +64,7 @@
 <p>The only personal data Dead Air stores is the Atlassian account ID described above. Atlassian requires apps that store account IDs to report them to its personal data reporting service and to delete or update them when an account is closed or changed. Dead Air does this weekly: when Atlassian reports an account as closed, the app ends any watch held by that account and removes its account ID. You can also email the address below at any time to have a stored account ID removed.</p>
 
 <h2>Removing your data</h2>
-<p>Stopping a watch from the Dead Air board deletes that desk's watch record and schedules its scan history, setup choices and expected job names for deletion. Uninstalling the app removes it from your site. To ask for deletion of anything the app stored, or with any question about this policy, email <a href="mailto:7kevinmasterson@gmail.com">7kevinmasterson@gmail.com</a>.</p>
+<p>Stopping a watch from the Dead Air board deletes that desk's watch record and schedules its scan history, setup choices and expected job names for deletion. It deletes the check in token hash and the check in counters at once. Turning check ins off also deletes the token hash straight away. Uninstalling the app removes it from your site. To ask for deletion of anything the app stored, or with any question about this policy, email <a href="mailto:7kevinmasterson@gmail.com">7kevinmasterson@gmail.com</a>.</p>
 
 <h2>Changes</h2>
 <p>If this policy changes, the updated version will be posted on this page with a new effective date.</p>
